@@ -1,16 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../login.css'
 import avatarImage from '../assets/happy-young-cute-illustration-face-profile-png.png';
+import { setCredentials } from '../slices/authSlice/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import {toast} from 'react-toastify'
+import Spinner from './Spinners';
 
 const Login: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle login logic here
-  };
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+  
+    const {userInfo} = useSelector((state: any) => state.auth)
+    console.log(userInfo)
+  
+    useEffect(() => {
+      const getUserData = () => {
+          if(userInfo) {
+              dispatch(setCredentials(userInfo))
+              navigate('/')
+          }
+      }
+      getUserData()
+    }, [userInfo])
+
+ 
+    const handleSubmit = async(e: React.FormEvent) => {
+        e.preventDefault();
+        setIsLoading(true)
+        try {
+    
+            const data = {
+                email,
+                password
+            }
+         const res = await fetch('/api/users/login', {
+            credentials:'include',
+            method:'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+         })
+
+         const myData = await res.json()
+         if(myData.email) {
+            dispatch(setCredentials({...myData}))
+            toast.success('login successfully')
+            navigate('/')
+         } else {
+            toast.error('Invalid email or password')
+         }
+         
+        } catch (err) {
+            //@ts-ignore
+            toast.error(err?.data?.message || err.error)
+            console.log(err)
+        }finally {
+            setIsLoading(false)
+        }
+      };
 
   return (
     <section>
@@ -23,14 +75,14 @@ const Login: React.FC = () => {
         </div>
 
         <div className="container">
-          <label htmlFor="uname"><b>Username</b></label>
+        <label htmlFor="uname"><b>email</b></label>
           <input
-            type="text"
-            placeholder="Enter Username"
-            name="uname"
+            type="email"
+            placeholder="Enter email"
+            name="email"
             required
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <label htmlFor="psw"><b>Password</b></label>
@@ -42,7 +94,7 @@ const Login: React.FC = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
+            {isLoading && <Spinner/>}
           <button type="submit">Login</button>
           <label>
             <input
@@ -55,8 +107,7 @@ const Login: React.FC = () => {
         </div>
 
         <div className="container" style={{ backgroundColor: '#f1f1f1' }}>
-          <button type="button" className="cancelbtn">Cancel</button>
-          <span className="psw">Forgot <a href="#">password?</a></span>
+        <span className="psw">Don't have an account <Link to="/register">Register</Link></span>
         </div>
       </form>
     </section>

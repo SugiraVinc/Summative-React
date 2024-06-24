@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
 import Image2 from '../assets/bg.png';
+import { Link } from 'react-router-dom';
 
 
 const Home: React.FC = () => {
@@ -27,9 +28,9 @@ const Home: React.FC = () => {
           <p>
             Discover a wealth of knowledge and guidance on mental health with Poetherapy. Whether you're seeking insights into managing anxiety, overcoming depression, or simply looking to enhance your overall well-being, our curated collection of books is here to support you on your journey.
           </p>
-          <a href="#" className="info-btn">
+          <Link to="/register" className="info-btn">
             Register
-          </a>
+          </Link>
         </div>
       </div>
 

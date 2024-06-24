@@ -1,12 +1,14 @@
 import User from "../models/userModel.js";
 import createCookie from "../utilis/utilis.js";
+import bcrypt from 'bcrypt'
 
 const authUser = async(req, res) => {
     try {
         const { email, password } = req.body
         const user = await User.findOne({email})
+        const isPasswordCorrect = await bcrypt.compare(password, user.password)
         
-        if(user && (user.checkPassword(password))) {
+        if(user && isPasswordCorrect) {
           createCookie(res, user._id)
           res.status(200).json({
               _id: user._id,
@@ -44,7 +46,8 @@ try {
          })
     }
 } catch (error) {
-   return res.status(500).json({message: "Fill all the Fields"})
+    console.log(error)
+    res.status(500).json({error})
 }
 }
 
