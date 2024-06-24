@@ -75,7 +75,7 @@ const Login: React.FC = () => {
         </div>
 
         <div className="container">
-        <label htmlFor="uname"><b>email</b></label>
+        <label htmlFor="email"><b>email</b></label>
           <input
             type="email"
             placeholder="Enter email"
