@@ -1,6 +1,5 @@
 import React from 'react';
-import { FaBars, FaTimes, FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
-import Image from '../assets/POETHERAPY_4[1].png';
+import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
 import Image2 from '../assets/bg.png';
 
 
@@ -16,22 +15,7 @@ const Home: React.FC = () => {
         overflow: 'hidden', 
       }}>
       <input type="checkbox" id="check" />
-      <header>
-        <h2>
-          <a href="/" className="logo">
-            <img src={Image} alt="Poetherapy Bookshop Logo" />
-          </a>
-        </h2>
-        <div className="navigation">
-          <a href="#">BookStore</a>
-          <a href="#">Login</a>
-          <a href="#">Contacts</a>
-        </div>
-        <label htmlFor="check">
-          <FaBars className="menu-btn" />
-          <FaTimes className="close-btn" />
-        </label>
-      </header>
+      
 
       <div className="content">
         <div className="info">
