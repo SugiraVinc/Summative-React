@@ -10,6 +10,7 @@ import store from './store'
 import Home from './components/Home'
 import Login from './components/Login'
 import MainLayout from './layout/MainLayout'
+import BookZone from './components/BookStore'
 import Register from './components/Register'
 
 const App: React.FC = () => {
@@ -19,6 +20,7 @@ const App: React.FC = () => {
            <Route path='/' element={<Home/>}/>
            <Route path='/login' element={<Login/>} />
            <Route path='/register' element={<Register/>}/>
+           <Route path='/book' element={<BookZone/>}/>
        </Route> 
     )
   )

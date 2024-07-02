@@ -2,7 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import connectDb from './config/db.js'
 import userRoutes from './routes/userRoutes.js'
-import blogRoutes from './routes/blogRoutes.js'
+import bookRoutes from './routes/bookRoutes.js'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 dotenv.config()
@@ -18,7 +18,7 @@ app.use(cors({
 }))
 app.use(cookieParser())
 app.use('/api/users', userRoutes)
-app.use('/api/blogs', blogRoutes)
+app.use('/api/books', bookRoutes)
 const PORT = 5000
 
 

@@ -1,6 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 
-const blogModel = new Schema({
+const bookModel = new Schema({
+    image: {
+        type: String,
+        required: [true, 'title is required']
+    },
     title: {
         type: String,
         required: [true, 'title is required']
@@ -11,6 +15,6 @@ const blogModel = new Schema({
     }
 }, {timestamps: true})
 
-const blogs = mongoose.model("Blogs", blogModel)
+const books = mongoose.model("Books", bookModel)
 
-export default blogs
+export default books

@@ -12,7 +12,6 @@ const checkAuth = async(req, res, next) =>{
         } catch (error) {
             console.log(error)
             res.status(401).json({message: 'Invalid Token'})
-            throw new Error('Invalid Token')
         }
     }else {
         res.status(401).json({message: "No Token Found"})

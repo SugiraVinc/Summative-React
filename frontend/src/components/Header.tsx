@@ -13,7 +13,7 @@ const Header: React.FC = () => {
           <img src={logoImage} alt="Logo" />
         </Link>
         <div className="navigation">
-          <Link to="#">BookStore</Link>
+          <Link to="/book">BookStore</Link>
           {userInfo ? <Link to="#">{userInfo.name}</Link> : <Link to="/login">Login</Link> }
           
           <Link to="#">Contacts</Link>
