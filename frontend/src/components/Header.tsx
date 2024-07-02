@@ -15,8 +15,8 @@ const Header: React.FC = () => {
         <div className="navigation">
           <Link to="/book">BookStore</Link>
           {userInfo ? <Link to="#">{userInfo.name}</Link> : <Link to="/login">Login</Link> }
+          {userInfo ? <Link to="/create-book">Create Book</Link> : '' }
           
-          <Link to="#">Contacts</Link>
         </div>
         <label htmlFor="check">
           <FaBars className="menu-btn" />
